@@ -1,0 +1,26 @@
+import math
+
+# Distance entre deux points
+def distance(lat1, lon1, lat2, lon2):
+    R = 6371  # rayon de la Terre en km
+    dLat = math.radians(lat2 - lat1)
+    dLon = math.radians(lon2 - lon1)
+    a = math.sin(dLat / 2) * math.sin(dLat / 2) + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dLon / 2) * math.sin(dLon / 2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    d = R * c
+    return d
+
+# Vitesse en km/h
+def vitesse(distance, temps):
+    return distance / temps
+
+# Exemple d'utilisation
+lat1 = 48.8567
+lon1 = 2.3508
+lat2 = 51.5072
+lon2 = -0.1276
+temps = 3600  # en secondes
+distance_parcourue = distance(lat1, lon1, lat2, lon2)
+vitesse_moyenne = vitesse(distance_parcourue, temps)
+print("Distance parcourue :", round(distance_parcourue, 2), "km")
+print("Vitesse moyenne :", round(vitesse_moyenne, 2), "km/h")
